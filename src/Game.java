@@ -1,7 +1,7 @@
 /*
  * Simple Tic Tac Toe Game
  * Author : Swapnil Rajput
- * Date : 01/02/2024
+ * Date : 08/02/2024
  */
 import javax.swing.*;
 import java.awt.*;
@@ -9,20 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Game extends Frame implements ActionListener {
-
-    Button[] b = new Button[9];
-
     int k = 0, x = 8, y = 28; // For the 9 buttons
     int a = 0; // O and X
     int z = 0, z1 = 0, z2 = 0, z3 = 0, z4 = 0, z5 = 0, z6 = 0, z7 = 0, z8 = 0; // For the 9 buttons
 
-    Button b1; // New game
-    int l = 70; //For label
-    boolean gameOver = false;
-    Label p1ScoreLabel;
-    Label p2ScoreLabel;
+    Button buttonNewGame; // New game
+    Label p1ScoreLabel,p2ScoreLabel;
     int p1Score = 0;
     int p2Score = 0;
+    Button[] b = new Button[9];
 
     Game() {
 
@@ -33,6 +28,7 @@ public class Game extends Frame implements ActionListener {
         setBackground(Color.black);
         setForeground(Color.white);
 
+        // For creating GRID
         for (int i = 1; i <= 3; i++) {
 
             for (int j = 1; j <= 3; j++) {
@@ -48,22 +44,22 @@ public class Game extends Frame implements ActionListener {
                 b[k].setBackground(new Color(255, 141, 28)); // ORANGE
                 k++;
                 x = x + 100;
-
             }
-
             x = 8;
             y = y + 100;
         }
 
-        b1 = new Button("New Game"); // Button text
-        b1.setSize(150, 40);
-        b1.setLocation(600, 300);
-        b1.setFont(new Font("", Font.BOLD, 20));
-        b1.setForeground(Color.white); // Text color
+        //New game button
+        buttonNewGame = new Button("New Game"); // Button text
+        buttonNewGame.setSize(150, 40);
+        buttonNewGame.setLocation(600, 300);
+        buttonNewGame.setFont(new Font("", Font.BOLD, 20));
+        buttonNewGame.setForeground(Color.white); // Text color
+        add(buttonNewGame);
+        buttonNewGame.addActionListener(this);
 
-        add(b1);
-        b1.addActionListener(this);
 
+        // Score labels
         p1ScoreLabel = new Label("Player 1 Score: " + p1Score);
         p1ScoreLabel.setSize(300, 50);
         p1ScoreLabel.setLocation(320, 70);
@@ -79,10 +75,11 @@ public class Game extends Frame implements ActionListener {
         add(p2ScoreLabel);
     }
 
+    //On button click
     public void actionPerformed(ActionEvent e) {
 
         // For new game
-        if (e.getSource() == b1) {
+        if (e.getSource() == buttonNewGame) {
 
             for (int i = 0; i <= 8; i++) {
                 b[i].setLabel("");
@@ -97,129 +94,33 @@ public class Game extends Frame implements ActionListener {
             z7 = 0;
             z8 = 0;
         }
+
+
         // For the 9 buttons
-
-        if (e.getSource() == b[0] && z == 0) {
-
-            if (a % 2 == 0) {
-                b[0].setLabel("O");
-                z++;
-                a++;
-            } else {
-                b[0].setLabel("X");
-                z++;
-                a++;
-            }
-
-        }
-        if (e.getSource() == b[1] && z1 == 0) {
-
-            if (a % 2 == 0) {
-                b[1].setLabel("O");
-                z1++;
-                a++;
-            } else {
-                b[1].setLabel("X");
-                z1++;
+        int[] zArray = {z, z1, z2, z3, z4, z5, z6, z7, z8};
+        for (int i = 0; i < 9; i++) {
+            if (e.getSource() == b[i] && zArray[i] == 0) {
+                if (a % 2 == 0) {
+                    b[i].setLabel("O");
+                } else {
+                    b[i].setLabel("X");
+                }
+                zArray[i]++;
                 a++;
             }
-
         }
-        if (e.getSource() == b[2] && z2 == 0) {
-
-            if (a % 2 == 0) {
-                b[2].setLabel("O");
-                z2++;
-                a++;
-            } else {
-                b[2].setLabel("X");
-                z2++;
-                a++;
-            }
-
-        }
-        if (e.getSource() == b[3] && z3 == 0) {
-
-            if (a % 2 == 0) {
-                b[3].setLabel("O");
-                z3++;
-                a++;
-            } else {
-                b[3].setLabel("X");
-                z3++;
-                a++;
-            }
-
-        }
-        if (e.getSource() == b[4] && z4 == 0) {
-
-            if (a % 2 == 0) {
-                b[4].setLabel("O");
-                z4++;
-                a++;
-            } else {
-                b[4].setLabel("X");
-                z4++;
-                a++;
-            }
-
-        }
-        if (e.getSource() == b[5] && z5 == 0) {
-
-            if (a % 2 == 0) {
-                b[5].setLabel("O");
-                z5++;
-                a++;
-            } else {
-                b[5].setLabel("X");
-                z5++;
-                a++;
-            }
-
-        }
-        if (e.getSource() == b[6] && z6 == 0) {
-
-            if (a % 2 == 0) {
-                b[6].setLabel("O");
-                z6++;
-                a++;
-            } else {
-                b[6].setLabel("X");
-                z6++;
-                a++;
-            }
-
-        }
-        if (e.getSource() == b[7] && z7 == 0) {
-
-            if (a % 2 == 0) {
-                b[7].setLabel("O");
-                z7++;
-                a++;
-            } else {
-                b[7].setLabel("X");
-                z7++;
-                a++;
-            }
-
-        }
-        if (e.getSource() == b[8] && z8 == 0) {
-
-            if (a % 2 == 0) {
-                b[8].setLabel("O");
-                z8++;
-                a++;
-            } else {
-                b[8].setLabel("X");
-                z8++;
-                a++;
-            }
-
-        }
+        // Update the z variables
+        z = zArray[0];
+        z1 = zArray[1];
+        z2 = zArray[2];
+        z3 = zArray[3];
+        z4 = zArray[4];
+        z5 = zArray[5];
+        z6 = zArray[6];
+        z7 = zArray[7];
+        z8 = zArray[8];
 
         // Winning conditions
-
-        Font f = new Font("", Font.BOLD, 20);
         for (int i = 0; i < 3; i++) {
             // Check rows
             if (b[i * 3].getLabel().equals(b[i * 3 + 1].getLabel()) && b[i * 3 + 1].getLabel().equals(b[i * 3 + 2].getLabel()) && !b[i * 3].getLabel().equals("")) {
